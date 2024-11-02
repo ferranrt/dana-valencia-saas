@@ -5,8 +5,9 @@ import ReactQueryProvider from "@/lib/react-query-provider";
 import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
-  title: "Dana Valencia - SaaS",
-  description: "Ferran Romero Torró",
+  title: "Ayuda a Valencia",
+  description:
+    "Una plataforma para ayudar a los más necesitados en Valencia tras la dana de 2024.",
 };
 
 export default function RootLayout({
