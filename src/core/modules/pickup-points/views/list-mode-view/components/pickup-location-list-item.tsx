@@ -4,7 +4,7 @@ import {
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
 import { PickupPoint } from "../../../domain/pickup-point";
-import { EllipsisVertical, Map, Phone } from "lucide-react";
+import { ChevronDown, EllipsisVertical, Map, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 
@@ -54,7 +54,7 @@ export const PickupLocationListItem = ({
         </div>
         <CollapsibleTrigger asChild>
           <Button variant="outline" size="icon">
-            <EllipsisVertical />
+            <ChevronDown />
           </Button>
         </CollapsibleTrigger>
       </div>
@@ -85,7 +85,7 @@ export const PickupLocationListItem = ({
                 </a>
               </Button>
             ) : (
-              <span>Sin teléfono</span>
+              <div />
             )}
           </div>
         </div>

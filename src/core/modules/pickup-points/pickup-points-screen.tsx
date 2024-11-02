@@ -43,7 +43,7 @@ const ConnectedPickupPointsScreen = () => {
     createPickupPointAction(data)
       .then(() => {
         toast({
-          title: "Punto de recogida creado",
+          title: "Punto de recogida registrado",
           description:
             "El punto de recogida ha sido creado con exito. En breves lo validaremos y aparecerá en la plataforma.",
           variant: "default",
@@ -118,13 +118,13 @@ const ConnectedPickupPointsScreen = () => {
         <DrawerContent>
           <DrawerHeader>
             <DrawerTitle>Registrar un nuevo punto de recogida</DrawerTitle>
-            <DrawerDescription>
+            <DrawerDescription className="text-xs">
               Los puntos de recogida son lugares donde las personas pueden
               llevar sus donaciones para que sean recogidas por los voluntarios
               y estos las llevaran a València.
             </DrawerDescription>
           </DrawerHeader>
-          <div className="max-h-[50vh] overflow-y-auto">
+          <div className="max-h-[60vh] overflow-y-auto">
             <Form {...form}>
               <CreatePickupPointForm form={form} />
             </Form>
@@ -132,7 +132,7 @@ const ConnectedPickupPointsScreen = () => {
           <DrawerFooter className="border-t">
             <Button onClick={form.handleSubmit(handleSubmit)}>
               <Send />
-              Enviar punt de recollida
+              Registrar punto de recogida
             </Button>
           </DrawerFooter>
         </DrawerContent>
