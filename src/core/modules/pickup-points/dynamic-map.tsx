@@ -63,10 +63,14 @@ export default function DynamicMap(props: Props) {
                     <Map />
                   </a>
                 </Button>
-                <Button size="sm">
-                  <Phone />
-                  Llamar
-                </Button>
+                {point.phone && point.phone.length > 0 ? (
+                  <Button size="sm" asChild>
+                    <a href={`tel:${point.phone}`}>
+                      <Phone />
+                      Llamar
+                    </a>
+                  </Button>
+                ) : null}
               </div>
             </Popup>
           </Marker>
