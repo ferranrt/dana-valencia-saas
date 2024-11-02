@@ -70,6 +70,8 @@ export const PickupLocationListItem = ({
             {location.location ? (
               <Button asChild variant="secondary" size="sm">
                 <a
+                  target="_blank"
+                  rel="noreferrer"
                   href={`https://maps.google.com/?q=${location.location.latitude},${location.location.longitude}`}
                 >
                   <Map />
