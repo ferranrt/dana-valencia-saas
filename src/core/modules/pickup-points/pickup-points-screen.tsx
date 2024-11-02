@@ -60,7 +60,6 @@ const ConnectedPickupPointsScreen = () => {
     <>
       <div className="relative h-full flex flex-col">
         <div className="z-20 flex justify-between items-center p-2 border-b">
-          <h2 className="text-xl font-bold">Ayuda Dana</h2>
           <ToggleGroup
             type="single"
             size="sm"
@@ -79,7 +78,7 @@ const ConnectedPickupPointsScreen = () => {
             </ToggleGroupItem>
           </ToggleGroup>
         </div>
-        <div className="flex-1">
+        <div className="flex-1 overflow-hidden flex flex-col">
           {match(mode)
             .with("map", () => {
               return (

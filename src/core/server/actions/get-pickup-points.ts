@@ -6,7 +6,7 @@ import { getSupabaseClient } from "../client/get-supabase-client";
 import { PickupPointDTO } from "../dtos/pickup-point.dto";
 import { AtLeastFilterBuilder } from "../db/at-least-filter-builder";
 const schema = z.object({
-  id: z.number(),
+  id: z.string(),
   city: z.string().default(""),
   created_at: z.string().default(""),
   lat: z.number().default(0),

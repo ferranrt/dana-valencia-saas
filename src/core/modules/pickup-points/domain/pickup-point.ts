@@ -1,5 +1,5 @@
 export type PickupPoint = {
-  id: number;
+  id: string;
   createdAt: Date;
   name: string;
   street: string;

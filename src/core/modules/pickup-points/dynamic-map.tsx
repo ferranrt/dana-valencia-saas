@@ -9,7 +9,7 @@ import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility
 import { getDefaultConfig } from "@/core/config/config";
 import { PickupPoint } from "./domain/pickup-point";
 import { Button } from "@/components/ui/button";
-import { Map, Phone } from "lucide-react";
+import { Map, Phone, Pin } from "lucide-react";
 
 type Props = {
   points?: PickupPoint[];
@@ -48,7 +48,6 @@ export default function DynamicMap(props: Props) {
               <div className="flex flex-col mb-4 space-y-0">
                 <p className="!my-0 font-bold">{point.name}</p>
                 <p className="text-xs text-muted-foreground">
-                  {" "}
                   {point.street} {point.number}
                 </p>
                 <p className="text-xs text-muted-foreground">

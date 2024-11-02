@@ -1,5 +1,5 @@
 export type PickupPointDTO = {
-  id: number;
+  id: string;
   createdAt: Date;
   name: string;
   street: string;
