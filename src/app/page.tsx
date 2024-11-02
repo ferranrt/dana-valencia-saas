@@ -1,5 +1,5 @@
 import { LegalFooter } from "@/core/modules/shared/components/footer";
-import { Map } from "lucide-react";
+import { Map, Phone } from "lucide-react";
 import Link from "next/link";
 import { ReactNode } from "react";
 
@@ -25,7 +25,7 @@ const RedirectLink: React.FC<{
 export default function Home() {
   return (
     <div className="p-4 flex flex-col flex-1 h-full">
-      <div className="flex flex-col flex-1 overflow-y-auto">
+      <div className="flex flex-col gap-4 flex-1 overflow-y-auto">
         <RedirectLink
           icon={<Map />}
           title="Puntos de recogida"
@@ -37,6 +37,15 @@ export default function Home() {
           <p>
             Conoces un punto de recogida que no está en el mapa? Ayúdanos a que
             más personas lo encuentren.
+          </p>
+        </RedirectLink>
+        <RedirectLink
+          icon={<Phone />}
+          title="Teléfonos de contacto"
+          href="/telefonos-contacto"
+        >
+          <p>
+            ¿Necesitas ayuda? Encuentra los teléfonos de contacto habilitados
           </p>
         </RedirectLink>
       </div>
