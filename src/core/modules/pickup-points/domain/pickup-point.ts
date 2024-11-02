@@ -1,12 +1,13 @@
 export type PickupPoint = {
-  id: string;
+  id: number;
   createdAt: Date;
   name: string;
   street: string;
   number: string;
   city: string;
-  postalCode: string;
+  postalCode: number;
   extraInfo: string;
+  phone?: string;
   location?: {
     latitude: number;
     longitude: number;

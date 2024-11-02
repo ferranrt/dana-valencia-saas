@@ -1,5 +1,4 @@
 "use client";
-import { Input } from "@/components/ui/input";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -9,83 +8,143 @@ import {
   DrawerFooter,
   DrawerHeader,
   DrawerTitle,
-  DrawerTrigger,
 } from "@/components/ui/drawer";
-import { Label } from "@/components/ui/label";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Textarea } from "@/components/ui/textarea";
-import { Pin, Plus, RefreshCw } from "lucide-react";
-import dynamic from "next/dynamic";
-import { usePickupPoints } from "./hooks/use-pickup-points";
+import { Form } from "@/components/ui/form";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import { createPickupPointAction } from "@/core/server/actions/create-pickup-point";
+import {
+  CreatePickupPointInpputDTO,
+  createPickupPointSchema,
+} from "@/core/server/schemas/creeate-pickup-point";
+import { useToast } from "@/hooks/use-toast";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { List, Map, Plus, RefreshCw, Send } from "lucide-react";
+import { useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { match } from "ts-pattern";
+import { usePickupPointsViewModel } from "../viewmodels/use-pickup-points-viewmodel";
+import { CreatePickupPointForm } from "./forms/create-pickup-point-form";
+import { ListModeView } from "./views/list-mode-view/list-mode-view";
+import { MapModeView } from "./views/map-mode-view/map-mode-view";
 
-export const PickupPointsScreen = () => {
-  const LazyMap = dynamic(() => import("./dynamic-map"), {
-    ssr: false,
-    loading: () => <p>Loading...</p>,
+type Modes = "map" | "list";
+const ConnectedPickupPointsScreen = () => {
+  const viewModel = usePickupPointsViewModel();
+  const { isLoading, mode, refetch, updateMode } = viewModel;
+
+  const form = useForm<CreatePickupPointInpputDTO>({
+    resolver: zodResolver(createPickupPointSchema),
   });
-  const { data, refetch } = usePickupPoints();
+
+  const { toast } = useToast();
+  const [createVisible, setCreateVisible] = useState<boolean>(false);
+
+  const handleSubmit: SubmitHandler<CreatePickupPointInpputDTO> = (data) => {
+    createPickupPointAction(data)
+      .then(() => {
+        toast({
+          title: "Punto de recogida creado",
+          description:
+            "El punto de recogida ha sido creado con exito. En breves lo validaremos y aparecerá en la plataforma.",
+          variant: "default",
+        });
+        setCreateVisible(false);
+        refetch();
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+  };
 
   return (
     <>
-      <div className="z-20  w-72   absolute top-2 left-1/2 -translate-x-1/2 ">
-        <Input placeholder="Buscar puntos de recogida" />
-      </div>
+      <div className="relative h-full flex flex-col">
+        <div className="z-20 flex justify-between items-center p-2 border-b">
+          <h2 className="text-xl font-bold">Ayuda Dana</h2>
+          <ToggleGroup
+            type="single"
+            size="sm"
+            value={mode}
+            onValueChange={(v) => {
+              updateMode(v as Modes);
+            }}
+          >
+            <ToggleGroupItem value="map">
+              <Map />
+              Mapa
+            </ToggleGroupItem>
+            <ToggleGroupItem value="list">
+              <List />
+              Llista
+            </ToggleGroupItem>
+          </ToggleGroup>
+        </div>
+        <div className="flex-1">
+          {match(mode)
+            .with("map", () => {
+              return (
+                <div className="z-10  w-full flex flex-col flex-1 relative h-full">
+                  <MapModeView viewModel={viewModel} />
+                </div>
+              );
+            })
+            .otherwise(() => {
+              return <ListModeView viewModel={viewModel} />;
+            })}
+        </div>
 
-      <div className="flex-1 h-full flex flex-col z-10 ">
-        <LazyMap
-          markers={data.points.map((x) => {
-            console.log({ x });
-            return {
-              lat: x.location?.latitude,
-              lng: x.location?.longitude,
-            };
-          })}
-        />
-      </div>
-      <div className="absolute z-20 bottom-2 right-2   ">
-        <Button
-          size="icon"
-          onClick={() => {
-            refetch();
-          }}
-        >
-          <RefreshCw />
-        </Button>
+        <div className=" flex justify-between p-2 bg-background border-t  gap-2">
+          <Button
+            variant="secondary"
+            className="flex-1"
+            onClick={() => {
+              refetch();
+            }}
+            loading={isLoading}
+          >
+            <RefreshCw /> Actualizar
+          </Button>
 
-        <Drawer>
-          <DrawerTrigger asChild>
-            <Button size="icon" className="rounded-full">
-              <Plus />
+          <Button
+            onClick={() => {
+              setCreateVisible(true);
+            }}
+            className="flex-1"
+          >
+            <Plus /> Crear punto
+          </Button>
+        </div>
+      </div>
+      <Drawer open={createVisible} onOpenChange={setCreateVisible}>
+        <DrawerContent>
+          <DrawerHeader>
+            <DrawerTitle>Registrar un nuevo punto de recogida</DrawerTitle>
+            <DrawerDescription>
+              Los puntos de recogida son lugares donde las personas pueden
+              llevar sus donaciones para que sean recogidas por los voluntarios.
+            </DrawerDescription>
+          </DrawerHeader>
+          <div className="max-h-[50vh] overflow-y-auto">
+            <Form {...form}>
+              <CreatePickupPointForm form={form} />
+            </Form>
+          </div>
+          <DrawerFooter className="border-t">
+            <Button onClick={form.handleSubmit(handleSubmit)}>
+              <Send />
+              Enviar punt de recollida
             </Button>
-          </DrawerTrigger>
-          <DrawerContent>
-            <DrawerHeader>
-              <DrawerTitle>Afegir un nou punt de recollida</DrawerTitle>
-              <DrawerDescription>
-                Omple el formulari per afegir un nou punt de recollida
-              </DrawerDescription>
-            </DrawerHeader>
-            <ScrollArea className="h-[70vh]">
-              <div className="grid gap-2 p-4">
-                <Input placeholder="Nombre del punto" />
-                <Input placeholder="Dirección" />
-                <Input placeholder="Ciudad" />
-                <Input placeholder="Codigo postal" />
-                <Input placeholder="Teléfono de contacto" />
-                <Textarea placeholder="Descripción del sitio" />
-
-                <Label>¿Te encuentras en este punto de recogida?</Label>
-                <Button variant={"secondary"}>
-                  <Pin /> Usar mi ubicación
-                </Button>
-              </div>
-              <DrawerFooter>
-                <Button>Enviar punt de recollida</Button>
-              </DrawerFooter>
-            </ScrollArea>
-          </DrawerContent>
-        </Drawer>
-      </div>
+          </DrawerFooter>
+        </DrawerContent>
+      </Drawer>
     </>
+  );
+};
+
+export const PickupPointsScreen = () => {
+  return (
+    <usePickupPointsViewModel.Provider>
+      <ConnectedPickupPointsScreen />
+    </usePickupPointsViewModel.Provider>
   );
 };

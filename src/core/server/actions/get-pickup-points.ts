@@ -1,9 +1,10 @@
 "use server";
-import { createClient } from "@supabase/supabase-js";
 
-import { getDefaultConfig } from "@/core/config/config";
+import * as z from "zod";
+
+import { getSupabaseClient } from "../client/get-supabase-client";
 import { PickupPointDTO } from "../dtos/pickup-point.dto";
-import { z } from "zod";
+import { AtLeastFilterBuilder } from "../db/at-least-filter-builder";
 const schema = z.object({
   id: z.number(),
   city: z.string().default(""),
@@ -11,34 +12,49 @@ const schema = z.object({
   lat: z.number().default(0),
   lng: z.number().default(0),
   extra_info: z.string().default(""),
+  phone: z.string().default(""),
   name: z.string().default(""),
   number: z.string().default(""),
   postal_code: z.number().default(0),
   street: z.string().default(""),
 });
 
-export async function getPickupPoints(): Promise<{
+export async function getPickupPoints(args?: { searchText?: string }): Promise<{
   points: Array<PickupPointDTO>;
 }> {
-  const config = getDefaultConfig();
-  console.log({
-    config,
-  });
-  const supabase = createClient(config.supabaseUrl, config.supabaseKey);
+  const supaclient = getSupabaseClient();
 
-  const { data, error } = await supabase.from("pickup_locations").select("*");
+  console.time("getPickupPoints");
+  const filterBUilder = new AtLeastFilterBuilder()
+    .addFilter({
+      colummn: "city",
+      like: args?.searchText ?? "",
+    })
+    .addFilter({
+      colummn: "name",
+      like: args?.searchText ?? "",
+    });
+  console.log(filterBUilder.buildFilter());
+  const { data, error } = await supaclient
+    .from("pickup_locations")
+    .select("*")
+    .eq("validated", true)
+    .or(filterBUilder.buildFilter());
 
+  /* .or(`city.ilike.%${args?.searchText}%,name.ilike.%${args?.searchText}%`); */
+
+  console.timeEnd("getPickupPoints");
   const parsedData = schema.array().parse(data);
 
-  console.log({
-    parsedData,
-    error,
-  });
+  if (error) {
+    throw error;
+  }
 
   const parse: Array<PickupPointDTO> =
     parsedData?.map((item) => {
       return {
         city: item.city,
+        phone: item.phone,
         createdAt: new Date(item.created_at),
         extraInfo: item.extra_info,
         id: item.id,
@@ -52,7 +68,6 @@ export async function getPickupPoints(): Promise<{
         street: item.street,
       };
     }) ?? [];
-
   return {
     points: parse,
   };

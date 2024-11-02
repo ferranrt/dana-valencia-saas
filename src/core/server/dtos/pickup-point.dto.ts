@@ -6,6 +6,7 @@ export type PickupPointDTO = {
   number: string;
   city: string;
   postalCode: number;
+  phone: string;
   extraInfo: string;
   location?: {
     latitude: number;

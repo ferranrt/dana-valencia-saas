@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import "./globals.css";
 import ReactQueryProvider from "@/lib/react-query-provider";
+import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
   title: "Dana Valencia - SaaS",
@@ -21,6 +22,7 @@ export default function RootLayout({
         <main className="flex-1 min-h-dvh">
           <ReactQueryProvider>{children}</ReactQueryProvider>
         </main>
+        <Toaster />
       </body>
     </html>
   );
