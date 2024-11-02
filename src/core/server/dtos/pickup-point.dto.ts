@@ -1,11 +1,11 @@
 export type PickupPointDTO = {
-  id: string;
+  id: number;
   createdAt: Date;
   name: string;
   street: string;
   number: string;
   city: string;
-  postalCode: string;
+  postalCode: number;
   extraInfo: string;
   location?: {
     latitude: number;

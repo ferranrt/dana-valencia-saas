@@ -1,4 +1,4 @@
-import { getPickupPoints } from "@/core/server/actions/pickup-points";
+import { getPickupPoints } from "@/core/server/actions/get-pickup-points";
 import { useQuery } from "@tanstack/react-query";
 
 export const usePickupPoints = () => {
