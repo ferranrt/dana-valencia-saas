@@ -120,7 +120,8 @@ const ConnectedPickupPointsScreen = () => {
             <DrawerTitle>Registrar un nuevo punto de recogida</DrawerTitle>
             <DrawerDescription>
               Los puntos de recogida son lugares donde las personas pueden
-              llevar sus donaciones para que sean recogidas por los voluntarios.
+              llevar sus donaciones para que sean recogidas por los voluntarios
+              y estos las llevaran a València.
             </DrawerDescription>
           </DrawerHeader>
           <div className="max-h-[50vh] overflow-y-auto">
