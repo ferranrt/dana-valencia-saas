@@ -15,12 +15,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={` antialiased max-w-4xl flex flex-col h-screen border-x mx-auto`}
+        className={` antialiased max-w-4xl flex flex-col  border-x mx-auto relative `}
       >
-        <header className="h-12 p-2 items-center flex">
-          <p className="font-semibold">Dana valencia</p>
-        </header>
-        {children}
+        <main className="flex-1 min-h-dvh">{children}</main>
       </body>
     </html>
   );

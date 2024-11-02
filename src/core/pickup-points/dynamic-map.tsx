@@ -1,26 +1,40 @@
 "use client";
 import { LatLngExpression } from "leaflet";
 import "leaflet/dist/leaflet.css";
+import { MapContainer, Popup, Marker, TileLayer, useMap } from "react-leaflet";
+import { getDefaultConfig } from "../config/config";
+import "leaflet/dist/leaflet.css";
 import "leaflet-defaulticon-compatibility";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
-import { MapContainer, Marker, TileLayer } from "react-leaflet";
 
 type Props = {
   markers?: LatLngExpression[];
   center?: LatLngExpression;
 };
 
+export function ChangeView({ coords }: { coords: LatLngExpression }) {
+  const map = useMap();
+  map.setView(coords, 12);
+  return null;
+}
+
 export default function DynamicMap(props: Props) {
-  const { center = [51.505, -0.09], markers = [] } = props;
+  const { center = getDefaultConfig().epicentre } = props;
+
   return (
-    <MapContainer center={center} zoom={13} scrollWheelZoom={false}>
-      <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
-      {markers.map((marker, index) => (
-        <Marker key={index} position={marker} />
-      ))}
+    <MapContainer
+      zoomControl={false}
+      attributionControl={false}
+      center={center}
+      zoom={12}
+      style={{ height: "100vh" }}
+    >
+      <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+
+      <Marker position={center}>
+        <Popup>as</Popup>
+      </Marker>
+      <ChangeView coords={center} />
     </MapContainer>
   );
 }
