@@ -58,7 +58,7 @@ const ConnectedPickupPointsScreen = () => {
 
   return (
     <>
-      <div className="relative h-full flex flex-col">
+      <div className="relative h-full overflow-hidden flex flex-col">
         <div className="z-20 flex justify-between items-center p-2 border-b">
           <ToggleGroup
             type="single"

@@ -58,7 +58,7 @@ export default function RootLayout({
                 alt="Logo Valencia"
               ></Image>
               <span className="text-2xl flex-1 text-center font-semibold">
-                DANA Valencia - 2024
+                DANA
               </span>
             </Link>
           </header>
