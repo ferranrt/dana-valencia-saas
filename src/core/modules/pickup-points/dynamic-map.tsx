@@ -55,9 +55,13 @@ export default function DynamicMap(props: Props) {
                 </p>
               </div>
               <div className="pt-4 border-t flex gap-2">
-                <Button size="sm" variant="secondary">
-                  <Map />
-                  En Google
+                <Button asChild size="sm" variant="secondary">
+                  <a
+                    href={`https://maps.google.com/?q=${point.location.latitude},${point.location.longitude}`}
+                  >
+                    En Google
+                    <Map />
+                  </a>
                 </Button>
                 <Button size="sm">
                   <Phone />
