@@ -1,15 +1,15 @@
 "use client";
 import { LatLngExpression } from "leaflet";
 import "leaflet/dist/leaflet.css";
-import { MapContainer, Popup, Marker, TileLayer, useMap } from "react-leaflet";
+import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
 
-import "leaflet/dist/leaflet.css";
+import { Button } from "@/components/ui/button";
+import { getDefaultConfig } from "@/core/config/config";
 import "leaflet-defaulticon-compatibility";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
-import { getDefaultConfig } from "@/core/config/config";
+import "leaflet/dist/leaflet.css";
+import { Map, Phone } from "lucide-react";
 import { PickupPoint } from "./domain/pickup-point";
-import { Button } from "@/components/ui/button";
-import { Map, Phone, Pin } from "lucide-react";
 
 type Props = {
   points?: PickupPoint[];

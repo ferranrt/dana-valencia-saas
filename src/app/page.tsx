@@ -1,4 +1,4 @@
-import { Map, Pin } from "lucide-react";
+import { Map } from "lucide-react";
 import Link from "next/link";
 import { ReactNode } from "react";
 
