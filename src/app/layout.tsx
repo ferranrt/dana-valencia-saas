@@ -7,10 +7,15 @@ import { Toaster } from "@/components/ui/toaster";
 import Image from "next/image";
 import Valencia from "../../public/valencia.png";
 import Link from "next/link";
-export const metadata: Metadata = {
+const config = {
   title: "Ayuda a Valencia - Dana 2024",
+  image: "/og.png",
   description:
     "Una plataforma para ayudar a los más necesitados en Valencia tras la dana de 2024.",
+};
+export const metadata: Metadata = {
+  title: config.title,
+  description: config.description,
 
   alternates: {
     canonical: "/",
@@ -18,14 +23,18 @@ export const metadata: Metadata = {
       es: "/es",
     },
   },
+  twitter: {
+    images: config.image,
+    title: config.title,
+
+    description: config.description,
+  },
   openGraph: {
     type: "website",
     countryName: "Spain",
-    title: "Ayuda a Valencia - Dana 2024",
-    description:
-      "Una plataforma para ayudar a los más necesitados en Valencia tras la dana de 2024.",
-    siteName: "Ayuda a Valencia - Dana 2024",
-    images: "/og.png",
+    title: config.title,
+    description: config.description,
+    images: config.image,
   },
 };
 
