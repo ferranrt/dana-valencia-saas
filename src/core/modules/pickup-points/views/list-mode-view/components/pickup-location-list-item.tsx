@@ -79,7 +79,7 @@ export const PickupLocationListItem = ({
                 </a>
               </Button>
             ) : null}
-            {location.phone ? (
+            {location.phone && location.phone?.length > 0 ? (
               <Button size="sm" asChild>
                 <a href={`tel:${location.phone}`}>
                   <Phone />
