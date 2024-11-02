@@ -31,7 +31,7 @@ export const LegalFooter = () => {
   return (
     <div className="flex justify-end">
       <Dialog>
-        <DialogTrigger>
+        <DialogTrigger asChild>
           <Button variant="link">Contacto</Button>
         </DialogTrigger>
         <DialogContent>
