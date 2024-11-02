@@ -1,4 +1,6 @@
 type AppConfig = {
+  supabaseUrl: string;
+  supabaseKey: string;
   epicentre: {
     lat: number;
     lng: number;
@@ -6,6 +8,8 @@ type AppConfig = {
 };
 
 const config: AppConfig = {
+  supabaseUrl: process.env.SUPABASE_URL || "",
+  supabaseKey: process.env.SUPABASE_API_KEY || "",
   epicentre: {
     lat: 39.438961,
     lng: -0.407728,

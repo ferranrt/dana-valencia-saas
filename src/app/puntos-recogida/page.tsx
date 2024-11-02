@@ -1,4 +1,4 @@
-import { PickupPointsScreen } from "@/core/pickup-points/pickup-points-screen";
+import { PickupPointsScreen } from "@/core/modules/pickup-points/pickup-points-screen";
 
 export default function PickupPoints() {
   return (

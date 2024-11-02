@@ -2,10 +2,11 @@
 import { LatLngExpression } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { MapContainer, Popup, Marker, TileLayer, useMap } from "react-leaflet";
-import { getDefaultConfig } from "../config/config";
+
 import "leaflet/dist/leaflet.css";
 import "leaflet-defaulticon-compatibility";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
+import { getDefaultConfig } from "@/core/config/config";
 
 type Props = {
   markers?: LatLngExpression[];
@@ -19,7 +20,7 @@ export function ChangeView({ coords }: { coords: LatLngExpression }) {
 }
 
 export default function DynamicMap(props: Props) {
-  const { center = getDefaultConfig().epicentre } = props;
+  const { center = getDefaultConfig().epicentre, markers } = props;
 
   return (
     <MapContainer
@@ -31,9 +32,12 @@ export default function DynamicMap(props: Props) {
     >
       <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
-      <Marker position={center}>
-        <Popup>as</Popup>
-      </Marker>
+      {markers?.map((marker, index) => (
+        <Marker key={index} position={marker}>
+          <Popup>as</Popup>
+        </Marker>
+      ))}
+
       <ChangeView coords={center} />
     </MapContainer>
   );
