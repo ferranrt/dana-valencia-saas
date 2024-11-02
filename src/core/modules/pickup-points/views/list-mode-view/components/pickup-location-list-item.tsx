@@ -10,6 +10,8 @@ import { Separator } from "@/components/ui/separator";
 
 type Props = {
   location: PickupPoint;
+  opened: boolean;
+  onToggle: () => void;
 };
 
 const getPrimaryText = (location: PickupPoint) => {
@@ -27,9 +29,19 @@ const getSecondaryText = (location: PickupPoint) => {
   return output;
 };
 
-export const PickupLocationListItem = ({ location }: Props) => {
+export const PickupLocationListItem = ({
+  location,
+  onToggle,
+  opened,
+}: Props) => {
   return (
-    <Collapsible className="border rounded p-3 flex flex-col items-start">
+    <Collapsible
+      open={opened}
+      onOpenChange={() => {
+        onToggle();
+      }}
+      className="border rounded p-3 flex flex-col items-start"
+    >
       <div className="flex w-full gap-2">
         <div className="flex flex-col flex-1">
           <h4 className="font-bold">{location.name}</h4>
