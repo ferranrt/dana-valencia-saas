@@ -11,6 +11,9 @@ export const metadata: Metadata = {
   title: "Ayuda a Valencia",
   description:
     "Una plataforma para ayudar a los más necesitados en Valencia tras la dana de 2024.",
+  openGraph: {
+    images: "/og.png",
+  },
 };
 
 export default function RootLayout({

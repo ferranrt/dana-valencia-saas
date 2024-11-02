@@ -4,7 +4,7 @@ import {
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
 import { PickupPoint } from "../../../domain/pickup-point";
-import { ChevronDown, EllipsisVertical, Map, Phone } from "lucide-react";
+import { ChevronDown, Map, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 
