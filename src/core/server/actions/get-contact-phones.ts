@@ -11,7 +11,10 @@ export async function getContactPhones(): Promise<{
 }> {
   const supaclient = getSupabaseClient();
 
-  const { data, error } = await supaclient.from("contact_phones").select("*");
+  const { data, error } = await supaclient
+    .from("contact_phones")
+    .select("*")
+    .order("weight", { ascending: false });
 
   const parsedData = contactPhoneDTOSchema.array().parse(data);
 
