@@ -11,11 +11,11 @@ const generatePhoneLink = (phone: string) => {
 };
 export const ContactPhoneListItem = ({ contact }: Props) => {
   return (
-    <div className="flex gap-4 p-3 border rounded-lg">
+    <div className="flex gap-4 p-3 border rounded-lg w-full">
       <div>
         <PhoneCall />
       </div>
-      <div className="flex flex-col">
+      <div className="flex flex-col flex-1">
         <p className="font-normal  text-foreground">
           <strong>{contact.title}</strong>
         </p>
