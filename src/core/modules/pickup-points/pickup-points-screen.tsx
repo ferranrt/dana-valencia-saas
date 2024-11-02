@@ -67,14 +67,16 @@ export const PickupPointsScreen = () => {
             </DrawerHeader>
             <ScrollArea className="h-[70vh]">
               <div className="grid gap-2 p-4">
-                <Input placeholder="Nom del punt de recollida" />
-                <Input placeholder="Direcció" />
-                <Input placeholder="Ciutat" />
-                <Input placeholder="Codi postal" />
-                <Textarea placeholder="Descripció del lloc" />
-                <Label>Et trobes en aquest punt de recollida?</Label>
+                <Input placeholder="Nombre del punto" />
+                <Input placeholder="Dirección" />
+                <Input placeholder="Ciudad" />
+                <Input placeholder="Codigo postal" />
+                <Input placeholder="Teléfono de contacto" />
+                <Textarea placeholder="Descripción del sitio" />
+
+                <Label>¿Te encuentras en este punto de recogida?</Label>
                 <Button variant={"secondary"}>
-                  <Pin /> Marcar la meva ubicació
+                  <Pin /> Usar mi ubicación
                 </Button>
               </div>
               <DrawerFooter>

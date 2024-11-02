@@ -34,7 +34,9 @@ export default function DynamicMap(props: Props) {
 
       {markers?.map((marker, index) => (
         <Marker key={index} position={marker}>
-          <Popup>as</Popup>
+          <Popup>
+            <p className="font-bold">Cruz Roja Valencia S:L</p>
+          </Popup>
         </Marker>
       ))}
 
