@@ -8,10 +8,23 @@ import Image from "next/image";
 import Valencia from "../../public/valencia.png";
 import Link from "next/link";
 export const metadata: Metadata = {
-  title: "Ayuda a Valencia",
+  title: "Ayuda a Valencia - Dana 2024",
   description:
     "Una plataforma para ayudar a los más necesitados en Valencia tras la dana de 2024.",
+
+  alternates: {
+    canonical: "/",
+    languages: {
+      es: "/es",
+    },
+  },
   openGraph: {
+    type: "website",
+    countryName: "Spain",
+    title: "Ayuda a Valencia - Dana 2024",
+    description:
+      "Una plataforma para ayudar a los más necesitados en Valencia tras la dana de 2024.",
+    siteName: "Ayuda a Valencia - Dana 2024",
     images: "/og.png",
   },
 };
@@ -24,7 +37,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={` antialiased max-w-4xl w-full flex flex-col h-dvh  border-x mx-auto relative `}
+        className={`antialiased max-w-4xl w-full flex flex-col h-dvh  border-x mx-auto relative `}
       >
         <ReactQueryProvider>
           <header className="flex w-full p-2 gap-2 items-center border-b">
