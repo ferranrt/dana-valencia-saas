@@ -1,3 +1,4 @@
+import { LegalFooter } from "@/core/modules/shared/components/footer";
 import { Map } from "lucide-react";
 import Link from "next/link";
 import { ReactNode } from "react";
@@ -23,8 +24,8 @@ const RedirectLink: React.FC<{
 };
 export default function Home() {
   return (
-    <div className="p-4">
-      <div>
+    <div className="p-4 flex flex-col flex-1 h-full">
+      <div className="flex flex-col flex-1 overflow-y-auto">
         <RedirectLink
           icon={<Map />}
           title="Puntos de recogida"
@@ -39,6 +40,7 @@ export default function Home() {
           </p>
         </RedirectLink>
       </div>
+      <LegalFooter />
     </div>
   );
 }
