@@ -11,7 +11,7 @@ const RedirectLink: React.FC<{
   return (
     <Link
       href={href}
-      className="p-2 gap-2 rounded-lg border hover:border-accent flex"
+      className="p-3 gap-3 rounded-xl active:bg-accent border hover:border-accent flex"
     >
       <div>{icon}</div>
       <div className="flex flex-col gap-2">
@@ -24,7 +24,6 @@ const RedirectLink: React.FC<{
 export default function Home() {
   return (
     <div className="p-4">
-      <h1>Ayuda a Valencia</h1>
       <div>
         <RedirectLink
           icon={<Map />}

@@ -21,18 +21,18 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={` antialiased max-w-4xl flex flex-col h-dvh  border-x mx-auto relative `}
+        className={` antialiased max-w-4xl w-full flex flex-col h-dvh  border-x mx-auto relative `}
       >
         <ReactQueryProvider>
-          <header className="flex p-2 gap-2 items-center border-b">
-            <Link href="/" className="flex gap-2 items-center">
+          <header className="flex w-full p-2 gap-2 items-center border-b">
+            <Link href="/" className="flex w-full flex-1 gap-2 items-center">
               <Image
                 src={Valencia}
                 width={25}
                 height={25}
                 alt="Logo Valencia"
               ></Image>
-              <span className="text-xl flex-1 text-center font-semibold">
+              <span className="text-2xl flex-1 text-center font-semibold">
                 DANA Valencia - 2024
               </span>
             </Link>
