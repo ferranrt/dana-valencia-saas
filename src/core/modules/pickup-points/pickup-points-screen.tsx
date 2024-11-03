@@ -60,6 +60,11 @@ const ConnectedPickupPointsScreen = () => {
       })
       .catch((e) => {
         console.error(e);
+        toast({
+          title: "Error",
+          description: `No se pudo registrar el punto de recogida. ${e.message}`,
+          variant: "destructive",
+        });
       });
   };
 
