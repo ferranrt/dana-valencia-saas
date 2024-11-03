@@ -49,7 +49,7 @@ export default function RootLayout({
         className={`antialiased max-w-4xl w-full flex flex-col h-dvh  border-x mx-auto relative `}
       >
         <ReactQueryProvider>
-          <header className="flex w-full p-2 gap-2 items-center border-b">
+          <header className="flex w-full p-2 gap-2 items-center ">
             <Link href="/" className="flex w-full flex-1 gap-2 items-center">
               <Image
                 src={Valencia}
@@ -58,7 +58,7 @@ export default function RootLayout({
                 alt="Logo Valencia"
               ></Image>
               <span className="text-2xl flex-1 text-center font-semibold">
-                DANA
+                Ayuda a Valencia
               </span>
             </Link>
           </header>

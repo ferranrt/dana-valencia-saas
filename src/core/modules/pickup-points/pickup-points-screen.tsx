@@ -18,7 +18,7 @@ import {
 } from "@/core/server/schemas/creeate-pickup-point";
 import { useToast } from "@/hooks/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { List, Map, Plus, RefreshCw, Send } from "lucide-react";
+import { Info, List, Map, Plus, RefreshCw, Send } from "lucide-react";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { match } from "ts-pattern";
@@ -26,6 +26,8 @@ import { usePickupPointsViewModel } from "../viewmodels/use-pickup-points-viewmo
 import { CreatePickupPointForm } from "./forms/create-pickup-point-form";
 import { ListModeView } from "./views/list-mode-view/list-mode-view";
 import { MapModeView } from "./views/map-mode-view/map-mode-view";
+import { useLocalStorage } from "@/hooks/use-local-storage";
+import { MoreInfoModal } from "./components/first-time-dialog";
 
 type Modes = "map" | "list";
 const ConnectedPickupPointsScreen = () => {
@@ -35,7 +37,12 @@ const ConnectedPickupPointsScreen = () => {
   const form = useForm<CreatePickupPointInpputDTO>({
     resolver: zodResolver(createPickupPointSchema),
   });
-
+  const [isFirstTime, setIsFirstTime] = useLocalStorage(
+    "fistTimePickup",
+    false
+  );
+  const [showInfo, setShowInfo] = useState<boolean>(false);
+  const moreInfoVisible = isFirstTime || showInfo;
   const { toast } = useToast();
   const [createVisible, setCreateVisible] = useState<boolean>(false);
 
@@ -58,8 +65,15 @@ const ConnectedPickupPointsScreen = () => {
 
   return (
     <>
+      <MoreInfoModal
+        open={moreInfoVisible}
+        onOpenChange={(v) => {
+          setIsFirstTime(false);
+          setShowInfo(v);
+        }}
+      />
       <div className="relative h-full overflow-hidden flex-1 flex flex-col">
-        <div className="z-20 flex justify-between items-center p-2 border-b">
+        <div className="flex justify-between items-center p-1 border-b">
           <ToggleGroup
             type="single"
             size="sm"
@@ -77,6 +91,14 @@ const ConnectedPickupPointsScreen = () => {
               Llista
             </ToggleGroupItem>
           </ToggleGroup>
+          <Button
+            variant="secondary"
+            onClick={() => {
+              setShowInfo((prev) => !prev);
+            }}
+          >
+            <Info /> Más información
+          </Button>
         </div>
         <div className="flex-1 overflow-hidden flex flex-col  ">
           {match(mode)

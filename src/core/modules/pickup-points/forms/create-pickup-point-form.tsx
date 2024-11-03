@@ -152,6 +152,7 @@ export const CreatePickupPointForm: React.FC<{
               <div className="flex flex-col gap-2">
                 <div className="grid grid-cols-2 gap-4">
                   <Input
+                    type="number"
                     value={field.value?.latitude ?? ""}
                     onChange={(e) => {
                       const value = e.target.valueAsNumber;
@@ -163,6 +164,7 @@ export const CreatePickupPointForm: React.FC<{
                     placeholder="Latitud"
                   />
                   <Input
+                    type="number"
                     value={field.value?.longitude ?? ""}
                     onChange={(e) => {
                       const value = e.target.valueAsNumber;
