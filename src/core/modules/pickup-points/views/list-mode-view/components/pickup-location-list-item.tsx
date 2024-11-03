@@ -44,7 +44,9 @@ export const PickupLocationListItem = ({
     >
       <div className="flex w-full gap-2">
         <div className="flex flex-col flex-1">
-          <h4 className="font-bold text-foreground">{location.name}</h4>
+          <h4 className="font-bold leading-4 mb-1 tracking-tighter text-foreground">
+            {location.name}
+          </h4>
           <p className="text-sm text-muted-foreground">
             {getPrimaryText(location)}
           </p>
