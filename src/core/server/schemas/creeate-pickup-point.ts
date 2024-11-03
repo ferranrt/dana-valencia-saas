@@ -8,8 +8,8 @@ export const createPickupPointSchema = z.object({
   city: z.string().default(""),
   postalCode: z.string().default(""),
   phone: z.string().default(""),
-  number: z.string().default(""),
-  description: z.string().default(""),
+  number: z.string().default("SN"),
+  description: z.string().default("Sin descripción."),
   location: z
     .object({
       latitude: z.number().default(0),
