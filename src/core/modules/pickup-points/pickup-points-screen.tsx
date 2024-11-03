@@ -50,9 +50,9 @@ const ConnectedPickupPointsScreen = () => {
     createPickupPointAction(data)
       .then(() => {
         toast({
-          title: "Punto de recogida registrado",
+          title: "Punto de recogida registrado correctamente!",
           description:
-            "El punto de recogida ha sido creado con exito. En breves lo validaremos y aparecerá en la plataforma.",
+            "En breves validaremos el formato y aparecerá en la plataforma para su visualización. ¡Muchas gracias!",
           variant: "default",
         });
         setCreateVisible(false);
