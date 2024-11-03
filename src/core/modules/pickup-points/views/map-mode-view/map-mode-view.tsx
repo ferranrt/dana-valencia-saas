@@ -10,7 +10,7 @@ export const MapModeView: React.FC<{ viewModel: PickupPointsViewModel }> = ({
     loading: () => <p>Loading...</p>,
   });
   return (
-    <div className="h-full w-full">
+    <div className="h-full w-full ">
       <LazyMap points={points.map((x) => x)} />
     </div>
   );

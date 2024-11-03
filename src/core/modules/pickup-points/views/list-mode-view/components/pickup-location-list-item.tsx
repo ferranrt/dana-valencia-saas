@@ -40,11 +40,11 @@ export const PickupLocationListItem = ({
       onOpenChange={() => {
         onToggle();
       }}
-      className="border rounded p-3 flex flex-col items-start"
+      className="border rounded p-2 flex flex-col items-start"
     >
       <div className="flex w-full gap-2">
         <div className="flex flex-col flex-1">
-          <h4 className="font-bold">{location.name}</h4>
+          <h4 className="font-bold text-foreground">{location.name}</h4>
           <p className="text-sm text-muted-foreground">
             {getPrimaryText(location)}
           </p>
@@ -61,11 +61,13 @@ export const PickupLocationListItem = ({
       <CollapsibleContent className="text-sm text-muted-foreground w-full">
         <Separator className="w-full my-2" />
         <div className="flex flex-col gap-2">
-          <p>
-            {location.extraInfo
-              ? location.extraInfo
-              : "El punto no tiene descripción."}
-          </p>
+          <div className="bg-muted p-3 border border-dashed rounded-lg">
+            <p className="text-muted-foreground">
+              {location.extraInfo && location.extraInfo.length > 0
+                ? location.extraInfo
+                : "El punto no tiene descripción."}
+            </p>
+          </div>
           <div className="flex justify-between">
             {location.location ? (
               <Button asChild variant="secondary" size="sm">

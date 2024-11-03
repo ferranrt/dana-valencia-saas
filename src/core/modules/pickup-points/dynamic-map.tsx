@@ -53,8 +53,15 @@ export default function DynamicMap(props: Props) {
                 <p className="text-xs text-muted-foreground">
                   {point.city} - {point.postalCode}
                 </p>
+                <div className="p-2 bg-muted">
+                  <p className="text-sm text-muted-foreground !m-0">
+                    {point.extraInfo && point.extraInfo.length > 0
+                      ? point.extraInfo
+                      : "Sin información adicional"}
+                  </p>
+                </div>
               </div>
-              <div className="pt-4 border-t flex gap-2">
+              <div className="pt-2 border-t flex gap-2">
                 <Button asChild size="sm" variant="secondary">
                   <a
                     href={`https://maps.google.com/?q=${point.location.latitude},${point.location.longitude}`}

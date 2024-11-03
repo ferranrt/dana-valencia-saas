@@ -58,7 +58,7 @@ const ConnectedPickupPointsScreen = () => {
 
   return (
     <>
-      <div className="relative h-full overflow-hidden flex flex-col">
+      <div className="relative h-full overflow-hidden flex-1 flex flex-col">
         <div className="z-20 flex justify-between items-center p-2 border-b">
           <ToggleGroup
             type="single"
@@ -78,7 +78,7 @@ const ConnectedPickupPointsScreen = () => {
             </ToggleGroupItem>
           </ToggleGroup>
         </div>
-        <div className="flex-1 overflow-hidden flex flex-col">
+        <div className="flex-1 overflow-hidden flex flex-col  ">
           {match(mode)
             .with("map", () => {
               return (
@@ -88,7 +88,13 @@ const ConnectedPickupPointsScreen = () => {
               );
             })
             .otherwise(() => {
-              return <ListModeView viewModel={viewModel} />;
+              return (
+                <div className="flex-1 relative">
+                  <div className="absolute inset-0  overflow-auto">
+                    <ListModeView viewModel={viewModel} />
+                  </div>
+                </div>
+              );
             })}
         </div>
 
